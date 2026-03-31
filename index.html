@@ -1,0 +1,52 @@
+<div class="talao-container" id="talao-digital">
+    <div class="header">
+        <h2>AMMPLA - PETROLINA</h2>
+        <h3>AUTO DE INFRAÇÃO DE TRANSPORTES</h3>
+    </div>
+
+    <div class="secao">
+        <span class="secao-titulo">01-IDENTIFICAÇÃO DO VEÍCULO</span>
+        <div class="grid-veiculo">
+            <label>Modelo: <input type="text" id="modelo" required></label>
+            <label>Marca: <input type="text" id="marca" required></label>
+            <label>Placa: <input type="text" id="placa" required></label>
+            <label>Ordem: <input type="text" id="ordem" required></label>
+        </div>
+    </div>
+
+    <div class="secao">
+        <span class="secao-titulo">02-IDENTIFICAÇÃO DA EMPRESA/CONDUTOR</span>
+        <label>Empresa/Autorizatário: <input type="text" id="empresa" style="width: 95%" required></label><br>
+        <div style="display: flex; gap: 20px; margin-top: 5px;">
+            <label>CNH: <input type="text" id="cnh" required></label>
+            <label>Categoria: <input type="text" id="cat_cnh" size="5" required></label>
+        </div>
+    </div>
+
+    <div class="secao">
+        <span class="secao-titulo">03-LOCAL, DATA E HORA DA INFRAÇÃO</span>
+        <div class="grid-local">
+            <label>Local: <input type="text" id="local" required></label>
+            <label>Data: <input type="date" id="data" required></label>
+            <label>Hora: <input type="time" id="hora" required></label>
+            <label>UF: <input type="text" value="PE" readonly size="2"></label>
+        </div>
+    </div>
+
+    <div class="secao">
+        <span class="secao-titulo">04-TIPIFICAÇÃO DA INFRAÇÃO (Selecione uma)</span>
+        <select id="tipificacao" style="width: 100%" required>
+            <option value="">-- Selecione a Infração --</option>
+            <option value="T-01">Transporte remunerado sem autorização [cite: 34]</option>
+            <option value="T-02">Atraso na viagem [cite: 35]</option>
+            <option value="T-03">Vistoria vencida [cite: 37]</option>
+            <option value="T-04">Falta de urbanidade [cite: 40]</option>
+            <option value="T-99">Outros (Descrever abaixo) [cite: 48]</option>
+        </select>
+        <label>Descrição detalhada:<br>
+            <textarea id="obs" style="width: 95%" rows="3"></textarea>
+        </label>
+    </div>
+
+    <button type="button" class="no-print" onclick="finalizarAuto()">Finalizar e Validar</button>
+</div>

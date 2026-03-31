@@ -1,0 +1,13 @@
+/* style.css */
+body { font-family: 'Courier New', Courier, monospace; background-color: #f4f4f4; padding: 20px; }
+.talao-container { background: #fff; width: 800px; margin: auto; padding: 20px; border: 2px solid #000; box-shadow: 5px 5px 15px rgba(0,0,0,0.1); }
+.header { text-align: center; border-bottom: 2px solid #000; margin-bottom: 10px; }
+.secao { border: 1px solid #333; margin-bottom: 10px; padding: 10px; }
+.secao-titulo { font-weight: bold; background: #eee; display: block; padding: 3px; margin-bottom: 5px; }
+
+/* Grid para Identificação do Veículo */
+.grid-veiculo { display: grid; grid-template-columns: 2fr 2fr 1fr 1fr; gap: 10px; }
+.grid-local { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 10px; }
+
+.no-print { margin-bottom: 20px; text-align: center; }
+@media print { .no-print { display: none; } .talao-container { border: none; box-shadow: none; } }
