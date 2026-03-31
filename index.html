@@ -22,14 +22,33 @@
 
         <form id="talao-form">
             <div class="secao">
-                <span class="secao-titulo">01-IDENTIFICAÇÃO DO VEÍCULO</span>
-                <div class="grid-veiculo">
-                    <label>Modelo: <input type="text" id="modelo"></label>
-                    <label>Marca: <input type="text" id="marca"></label>
-                    <label>Placa: <input type="text" id="placa"></label>
-                    <label>Ordem: <input type="text" id="ordem"></label>
-                </div>
-            </div>
+    <span class="secao-titulo">01-IDENTIFICAÇÃO DO VEÍCULO</span>
+    
+    <div style="margin-bottom: 15px;">
+        <label><strong>Categoria do Transporte:</strong></label>
+        <select id="categoria_transporte" style="width: 100%; margin-top: 5px;">
+            <option value="">-- Selecione a Categoria --</option>
+            <option value="Urbano">Transporte Coletivo Urbano</option>
+            <option value="Rural">Transporte Coletivo Rural</option>
+            <option value="Fretamento">Fretamento</option>
+            <option value="Mototaxi">Mototáxi</option>
+            <option value="Taxi">Táxi</option>
+            <option value="Turismo">Turismo</option>
+            <option value="Escolar">Escolar</option>
+            <option value="Outros">Outros</option>
+        </select>
+    </div>
+
+    <div class="grid-veiculo">
+        <label>Modelo: <input type="text" id="modelo"></label>
+        <label>Marca: <input type="text" id="marca"></label>
+        <label>Placa: <input type="text" id="placa"></label>
+        <label>Nº da Ordem: <input type="text" id="num_ordem"></label>
+        <label>Linha: <input type="text" id="linha"></label>
+        <label>Código da Linha: <input type="text" id="cod_linha"></label>
+        <label>TP: <input type="text" id="tp" placeholder="Term. de Ponto"></label>
+    </div>
+</div>
 
             <div class="secao">
                 <span class="secao-titulo">02-IDENTIFICAÇÃO DA EMPRESA/CONDUTOR</span>

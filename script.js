@@ -1,39 +1,36 @@
 function finalizarAuto() {
-    // Mapeamento dos campos baseado no modelo físico da AMMPLA
     const camposObrigatorios = [
-        { id: 'modelo', nome: '01. Modelo do Veículo' },
+        { id: 'categoria_transporte', nome: '01. Categoria do Transporte' },
+        { id: 'modelo', nome: '01. Modelo' },
         { id: 'placa', nome: '01. Placa' },
+        { id: 'num_ordem', nome: '01. Nº da Ordem' },
         { id: 'empresa', nome: '02. Empresa/Condutor' },
         { id: 'local', nome: '03. Local da Infração' },
         { id: 'data', nome: '03. Data' },
-        { id: 'hora', nome: '03. Hora' },
-        { id: 'tipificacao', nome: '04. Tipificação da Infração' }
+        { id: 'hora', nome: '03. Hora' }
     ];
 
     let erros = [];
 
-    // Limpa marcações de erro anteriores
-    camposObrigatorios.forEach(campo => {
-        document.getElementById(campo.id).style.border = "1px solid #ccc";
-    });
-
-    // Verificação campo a campo
     camposObrigatorios.forEach(campo => {
         const elemento = document.getElementById(campo.id);
         if (!elemento.value.trim()) {
             erros.push(campo.nome);
-            elemento.style.border = "2px solid #e74c3c"; // Destaque em vermelho
+            elemento.style.backgroundColor = "#ffeaa7"; // Destaque suave em amarelo
+        } else {
+            elemento.style.backgroundColor = "transparent";
         }
     });
 
-    // Se houver erros, exibe o alerta e não prossegue
     if (erros.length > 0) {
-        alert("⚠️ ATENÇÃO: AUTO INCOMPLETO\n\nO preenchimento do talão físico exige todos os dados para evitar nulidade. Faltam os seguintes campos:\n\n- " + erros.join("\n- "));
-        return; // Interrompe a função aqui
+        alert("⚠️ ERRO DE PREENCHIMENTO\n\nTodos os campos de identificação devem ser preenchidos:\n\n- " + erros.join("\n- "));
+        return;
     }
 
-    // Se passar na validação
-    confirmarRegistro();
+    // Se passar na validação, executa o restante...
+    alert("Auto validado com sucesso!");
+    salvarNaSessao();
+    window.print();
 }
 
 function confirmarRegistro() {
