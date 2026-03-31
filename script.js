@@ -1,30 +1,46 @@
 function finalizarAuto() {
-    const campos = [
-        { id: 'placa', nome: 'Placa do Veículo' },
-        { id: 'empresa', nome: 'Nome da Empresa/Condutor' },
-        { id: 'local', nome: 'Local da Infração' },
-        { id: 'data', nome: 'Data' },
-        { id: 'tipificacao', nome: 'Tipificação da Infração' }
+    // Mapeamento dos campos baseado no modelo físico da AMMPLA
+    const camposObrigatorios = [
+        { id: 'modelo', nome: '01. Modelo do Veículo' },
+        { id: 'placa', nome: '01. Placa' },
+        { id: 'empresa', nome: '02. Empresa/Condutor' },
+        { id: 'local', nome: '03. Local da Infração' },
+        { id: 'data', nome: '03. Data' },
+        { id: 'hora', nome: '03. Hora' },
+        { id: 'tipificacao', nome: '04. Tipificação da Infração' }
     ];
 
-    let esquecidos = [];
+    let erros = [];
 
-    campos.forEach(campo => {
+    // Limpa marcações de erro anteriores
+    camposObrigatorios.forEach(campo => {
+        document.getElementById(campo.id).style.border = "1px solid #ccc";
+    });
+
+    // Verificação campo a campo
+    camposObrigatorios.forEach(campo => {
         const elemento = document.getElementById(campo.id);
-        if (!elemento.value || elemento.value === "") {
-            esquecidos.push(campo.nome);
-            elemento.style.border = "2px solid red";
-        } else {
-            elemento.style.border = "1px solid #ccc";
+        if (!elemento.value.trim()) {
+            erros.push(campo.nome);
+            elemento.style.border = "2px solid #e74c3c"; // Destaque em vermelho
         }
     });
 
-    if (esquecidos.length > 0) {
-        alert("ERRO DE PREENCHIMENTO:\nOs seguintes campos são obrigatórios:\n- " + esquecidos.join("\n- "));
-    } else {
-        alert("Auto validado com sucesso! Gerando comprovante para impressão.");
+    // Se houver erros, exibe o alerta e não prossegue
+    if (erros.length > 0) {
+        alert("⚠️ ATENÇÃO: AUTO INCOMPLETO\n\nO preenchimento do talão físico exige todos os dados para evitar nulidade. Faltam os seguintes campos:\n\n- " + erros.join("\n- "));
+        return; // Interrompe a função aqui
+    }
+
+    // Se passar na validação
+    confirmarRegistro();
+}
+
+function confirmarRegistro() {
+    if (confirm("Todos os campos foram preenchidos corretamente. Deseja imprimir o comprovante e salvar na sessão?")) {
         salvarNaSessao();
         window.print();
+        document.getElementById('talao-form').reset();
     }
 }
 
