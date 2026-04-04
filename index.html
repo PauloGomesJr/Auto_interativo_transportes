@@ -73,6 +73,38 @@
                     <label>Hora: <input type="time" id="hora"></label>
                 </div>
             </div>
+            <div class="secao">
+                
+    <span class="secao-titulo">04-TIPIFICAÇÃO DA INFRAÇÃO</span>
+    
+    <div class="lista-infracoes">
+        <label><input type="radio" name="infracao" value="Serviço s/ autorização"> Executar serviço de transporte remunerado de passageiros, sem autorização do poder público</label>
+        <label><input type="radio" name="infracao" value="Atraso"> Deixar de realizar viagem ou realizá-la com atraso</label>
+        <label><input type="radio" name="infracao" value="Itinerário OSO"> Deixar de cumprir os itinerários estabelecidos na OSO</label>
+        <label><input type="radio" name="infracao" value="Vistoria vencida"> Transitar com veículo com certificado de cadastro ou de vistoria vencido</label>
+        <label><input type="radio" name="infracao" value="Doc. Porte Obrigatório"> Transitar sem os documentos de porte obrigatório exigidos</label>
+        <label><input type="radio" name="infracao" value="Equip. Defeituoso"> Operar com veículo com equipamento de iluminação interna, letreiro, campainha e descarga defeituosos</label>
+        <label><input type="radio" name="infracao" value="Falta urbanidade"> Tratar com falta de urbanidade passageiro ou pessoal de operação e fiscalização</label>
+        <label><input type="radio" name="infracao" value="Danos físicos veículo"> Colocar em operação veículos com vidros, janelas ou portas quebradas ou bancos danificados</label>
+        <label><input type="radio" name="infracao" value="Descumprir determinação"> Deixar de cumprir as determinações do poder público</label>
+        <label><input type="radio" name="infracao" value="Sinal de parada"> Deixar de atender ao sinal de parada para embarque ou desembarque</label>
+        <label><input type="radio" name="infracao" value="Sem segurança"> Colocar em operação veículo que não apresenta condições de segurança</label>
+        <label><input type="radio" name="infracao" value="Equip. Obrigatório defeito"> Operar veículo com equipamentos obrigatórios com defeito, ausente ou inoperante</label>
+        <label><input type="radio" name="infracao" value="Dirigir inadequadamente"> Dirigir inadequadamente, pondo em risco a vida de pessoas ou motoristas</label>
+        <label><input type="radio" name="infracao" value="Porta aberta"> Transitar o veículo com porta aberta</label>
+        <label><input type="radio" name="infracao" value="Outros" id="radio-outros"> Outros:</label>
+    </div>
+
+    <div class="campo-obs">
+        <label>Descrição da Infração:</label>
+        <textarea id="desc_infracao" rows="4" style="width: 100%;" placeholder="Descreva detalhadamente a infração conforme observado..."></textarea>
+    </div>
+
+    <div class="grid-check-final" style="display: flex; gap: 20px; margin-top: 10px;">
+        <label><input type="checkbox" id="veiculo_recolhido"> Veículo Recolhido</label>
+        <label><input type="checkbox" id="infrator_notificado"> Infrator Notificado no Ato</label>
+    </div>
+</div>
 
             <button type="button" class="btn-validar no-print" onclick="finalizarAuto()">Finalizar e Validar</button>
         </form>

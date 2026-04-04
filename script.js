@@ -34,6 +34,22 @@ function finalizarAuto() {
     alert("Auto validado com sucesso!");
     salvarNaSessao();
     window.print();
+
+    const infracaoSelecionada = document.querySelector('input[name="infracao"]:checked');
+    const descricaoTexto = document.getElementById('desc_infracao').value.trim();
+
+    if (!infracaoSelecionada) {
+        alert("⚠️ ERRO: Nenhuma infração foi selecionada na Seção 04.");
+        return;
+    }
+
+    if (infracaoSelecionada.value === "Outros" && descricaoTexto === "") {
+        alert("⚠️ ERRO: Você selecionou 'Outros', mas não descreveu a infração.");
+        return;
+    }
+
+    // Se tudo estiver OK, salvar e imprimir
+    registrarEImprimir();
 }
 
 function confirmarRegistro() {

@@ -43,6 +43,35 @@ input {
     text-transform: uppercase; /* Facilita a leitura didática */
 }
 
+.lista-infracoes {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 10px;
+    font-size: 0.85em;
+}
+
+.lista-infracoes label {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-weight: normal;
+    cursor: pointer;
+}
+
+.campo-obs {
+    border-top: 1px solid #000;
+    padding-top: 10px;
+}
+
+textarea {
+    border: none;
+    background: repeating-linear-gradient(transparent, transparent 23px, #ccc 24px);
+    line-height: 24px;
+    font-family: 'Courier New', monospace;
+    resize: none;
+}
+
 /* Garante que campos menores ou específicos não quebrem o layout */
 input {
     border: none;
