@@ -51,20 +51,20 @@
             </fieldset>
 
             <fieldset class="secao">
-                <legend class="secao-titulo">02-IDENTIFICAÇÃO DA EMPRESA/CONDUTOR</legend>
-                <label>Empresa/Autorizatário/Condutor: <input type="text" id="empresa" class="w100"></label>
-                <div class="grid-2-col">
-                    <label>CNH: <input type="text" id="cnh"></label>
-                    <label>Categoria: <input type="text" id="cat_cnh" maxlength="5"></label>
-                </div>
-            </fieldset>
-
-            <fieldset class="secao">
                 <legend class="secao-titulo">03-LOCAL E DATA DA INFRAÇÃO</legend>
-                <div class="grid-local">
-                    <label>Local: <input type="text" id="local"></label>
-                    <label>Data: <input type="date" id="data"></label>
-                    <label>Hora: <input type="time" id="hora"></label>
+                <div class="grid-local-expandido">
+                    <div class="campo-local">
+                        <label>Local da Infração:</label>
+                        <input type="text" id="local" placeholder="Ex: Av. Sete de Setembro, esq. com Rua da Paz">
+                    </div>
+                    <div class="campo-data">
+                        <label>Data:</label>
+                        <input type="date" id="data">
+                    </div>
+                    <div class="campo-hora">
+                        <label>Hora:</label>
+                        <input type="time" id="hora">
+                    </div>
                 </div>
             </fieldset>
 
