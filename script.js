@@ -7,7 +7,10 @@ function finalizarAuto() {
         { id: 'empresa', nome: '02. Empresa/Condutor' },
         { id: 'local', nome: '03. Local da Infração' },
         { id: 'data', nome: '03. Data' },
-        { id: 'hora', nome: '03. Hora' }
+        { id: 'hora', nome: '03. Hora' },
+        { id: 'empresa', nome: '02. Empresa/Autorizatário/Condutor' },
+        { id: 'cnh', nome: '02. CNH' },
+        { id: 'cat_cnh', nome: '02. Categoria da CNH' }
     ];
 
     let erros = [];

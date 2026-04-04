@@ -52,8 +52,17 @@
 
             <div class="secao">
                 <span class="secao-titulo">02-IDENTIFICAÇÃO DA EMPRESA/CONDUTOR</span>
-                <label>Nome: <input type="text" id="empresa" style="width: 80%"></label>
-                <label>CNH: <input type="text" id="cnh"></label>
+                
+                <div class="campo-linha">
+                    <label>Empresa/Autorizatário/Condutor: <br>
+                        <input type="text" id="empresa" style="width: 100%;">
+                    </label>
+                </div>
+
+                <div class="grid-cnh">
+                    <label>CNH: <input type="text" id="cnh"></label>
+                    <label>Categoria: <input type="text" id="cat_cnh" maxlength="5"></label>
+                </div>
             </div>
 
             <div class="secao">
