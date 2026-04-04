@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simulador AMMPLA - Fiscalização</title>
+    <title>Simulador de AIT - AMMPLA Petrolina</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -13,113 +13,119 @@
     <button onclick="mudarAba('lista')">📋 Histórico da Sessão</button>
 </nav>
 
-<div id="aba-form" class="aba">
+<div id="aba-form" class="aba active">
     <div class="talao-container">
-        <div class="header">
+        <header class="header">
             <h1>AMMPLA - Petrolina/PE</h1>
             <h2>AUTO DE INFRAÇÃO DE TRANSPORTES</h2>
-        </div>
+        </header>
 
         <form id="talao-form">
-            <div class="secao">
-    <span class="secao-titulo">01-IDENTIFICAÇÃO DO VEÍCULO</span>
-    
-    <div style="margin-bottom: 15px;">
-        <label><strong>Categoria do Transporte:</strong></label>
-        <select id="categoria_transporte" style="width: 100%; margin-top: 5px;">
-            <option value="">-- Selecione a Categoria --</option>
-            <option value="Urbano">Transporte Coletivo Urbano</option>
-            <option value="Rural">Transporte Coletivo Rural</option>
-            <option value="Fretamento">Fretamento</option>
-            <option value="Mototaxi">Mototáxi</option>
-            <option value="Taxi">Táxi</option>
-            <option value="Turismo">Turismo</option>
-            <option value="Escolar">Escolar</option>
-            <option value="Outros">Outros</option>
-        </select>
-    </div>
-
-    <div class="grid-veiculo">
-        <label>Modelo: <input type="text" id="modelo"></label>
-        <label>Marca: <input type="text" id="marca"></label>
-        <label>Placa: <input type="text" id="placa"></label>
-        <label>Nº da Ordem: <input type="text" id="num_ordem"></label>
-        <label>Linha: <input type="text" id="linha"></label>
-        <label>Código da Linha: <input type="text" id="cod_linha"></label>
-        <label>TP: <input type="text" id="tp" placeholder="Term. de Ponto"></label>
-    </div>
-</div>
-
-            <div class="secao">
-                <span class="secao-titulo">02-IDENTIFICAÇÃO DA EMPRESA/CONDUTOR</span>
+            <fieldset class="secao">
+                <legend class="secao-titulo">01-IDENTIFICAÇÃO DO VEÍCULO</legend>
                 
-                <div class="campo-linha">
-                    <label>Empresa/Autorizatário/Condutor: <br>
-                        <input type="text" id="empresa" style="width: 100%;">
-                    </label>
+                <div class="campo-full">
+                    <label>Categoria do Transporte:</label>
+                    <select id="categoria_transporte">
+                        <option value="">-- Selecione --</option>
+                        <option value="Urbano">Transporte Coletivo Urbano</option>
+                        <option value="Rural">Transporte Coletivo Rural</option>
+                        <option value="Fretamento">Fretamento</option>
+                        <option value="Mototaxi">Mototáxi</option>
+                        <option value="Taxi">Táxi</option>
+                        <option value="Turismo">Turismo</option>
+                        <option value="Escolar">Escolar</option>
+                        <option value="Outros">Outros</option>
+                    </select>
                 </div>
 
-                <div class="grid-cnh">
+                <div class="grid-3-col">
+                    <label>Modelo: <input type="text" id="modelo"></label>
+                    <label>Marca: <input type="text" id="marca"></label>
+                    <label>Placa: <input type="text" id="placa"></label>
+                    <label>Nº da Ordem: <input type="text" id="num_ordem"></label>
+                    <label>Linha: <input type="text" id="linha"></label>
+                    <label>Código: <input type="text" id="cod_linha"></label>
+                </div>
+                <label>TP (Term. de Ponto): <input type="text" id="tp"></label>
+            </fieldset>
+
+            <fieldset class="secao">
+                <legend class="secao-titulo">02-IDENTIFICAÇÃO DA EMPRESA/CONDUTOR</legend>
+                <label>Empresa/Autorizatário/Condutor: <input type="text" id="empresa" class="w100"></label>
+                <div class="grid-2-col">
                     <label>CNH: <input type="text" id="cnh"></label>
                     <label>Categoria: <input type="text" id="cat_cnh" maxlength="5"></label>
                 </div>
-            </div>
+            </fieldset>
 
-            <div class="secao">
-                <span class="secao-titulo">03-IDENTIFICAÇÃO DO LOCAL E DATA</span>
+            <fieldset class="secao">
+                <legend class="secao-titulo">03-LOCAL E DATA DA INFRAÇÃO</legend>
                 <div class="grid-local">
                     <label>Local: <input type="text" id="local"></label>
                     <label>Data: <input type="date" id="data"></label>
                     <label>Hora: <input type="time" id="hora"></label>
                 </div>
-            </div>
-            <div class="secao">
+            </fieldset>
+
+            <fieldset class="secao">
+                <legend class="secao-titulo">04-TIPIFICAÇÃO DA INFRAÇÃO</legend>
+                <div class="lista-infracoes">
+                    <label><input type="radio" name="infracao" value="S/ Autorização"> Transporte remunerado sem autorização</label>
+                    <label><input type="radio" name="infracao" value="Atraso"> Realizar viagem com atraso</label>
+                    <label><input type="radio" name="infracao" value="Itinerário"> Descumprir itinerário da OSO</label>
+                    <label><input type="radio" name="infracao" value="Vistoria"> Certificado de vistoria vencido</label>
+                    <label><input type="radio" name="infracao" value="Urbanidade"> Falta de urbanidade com passageiro</label>
+                    <label><input type="radio" name="infracao" value="Segurança"> Veículo sem condições de segurança</label>
+                    <label><input type="radio" name="infracao" value="Porta Aberta"> Transitar com porta aberta</label>
+                    <label><input type="radio" name="infracao" value="Outros"> Outros:</label>
+                </div>
+                <textarea id="desc_infracao" rows="3" placeholder="Descrição detalhada..."></textarea>
                 
-    <span class="secao-titulo">04-TIPIFICAÇÃO DA INFRAÇÃO</span>
-    
-    <div class="lista-infracoes">
-        <label><input type="radio" name="infracao" value="Serviço s/ autorização"> Executar serviço de transporte remunerado de passageiros, sem autorização do poder público</label>
-        <label><input type="radio" name="infracao" value="Atraso"> Deixar de realizar viagem ou realizá-la com atraso</label>
-        <label><input type="radio" name="infracao" value="Itinerário OSO"> Deixar de cumprir os itinerários estabelecidos na OSO</label>
-        <label><input type="radio" name="infracao" value="Vistoria vencida"> Transitar com veículo com certificado de cadastro ou de vistoria vencido</label>
-        <label><input type="radio" name="infracao" value="Doc. Porte Obrigatório"> Transitar sem os documentos de porte obrigatório exigidos</label>
-        <label><input type="radio" name="infracao" value="Equip. Defeituoso"> Operar com veículo com equipamento de iluminação interna, letreiro, campainha e descarga defeituosos</label>
-        <label><input type="radio" name="infracao" value="Falta urbanidade"> Tratar com falta de urbanidade passageiro ou pessoal de operação e fiscalização</label>
-        <label><input type="radio" name="infracao" value="Danos físicos veículo"> Colocar em operação veículos com vidros, janelas ou portas quebradas ou bancos danificados</label>
-        <label><input type="radio" name="infracao" value="Descumprir determinação"> Deixar de cumprir as determinações do poder público</label>
-        <label><input type="radio" name="infracao" value="Sinal de parada"> Deixar de atender ao sinal de parada para embarque ou desembarque</label>
-        <label><input type="radio" name="infracao" value="Sem segurança"> Colocar em operação veículo que não apresenta condições de segurança</label>
-        <label><input type="radio" name="infracao" value="Equip. Obrigatório defeito"> Operar veículo com equipamentos obrigatórios com defeito, ausente ou inoperante</label>
-        <label><input type="radio" name="infracao" value="Dirigir inadequadamente"> Dirigir inadequadamente, pondo em risco a vida de pessoas ou motoristas</label>
-        <label><input type="radio" name="infracao" value="Porta aberta"> Transitar o veículo com porta aberta</label>
-        <label><input type="radio" name="infracao" value="Outros" id="radio-outros"> Outros:</label>
-    </div>
+                <div class="flex-row">
+                    <label><input type="checkbox" id="veiculo_recolhido"> Veículo Recolhido</label>
+                    <label><input type="checkbox" id="infrator_notificado"> Infrator Notificado</label>
+                </div>
+            </fieldset>
 
-    <div class="campo-obs">
-        <label>Descrição da Infração:</label>
-        <textarea id="desc_infracao" rows="4" style="width: 100%;" placeholder="Descreva detalhadamente a infração conforme observado..."></textarea>
-    </div>
+            <fieldset class="secao">
+                <legend class="secao-titulo">05-AMPARO LEGAL</legend>
+                <div class="grid-3-col">
+                    <label>Ato: <input type="text" id="amparo_ato"></label>
+                    <label>Artigos: <input type="text" id="amparo_artigos"></label>
+                    <label>Incisos: <input type="text" id="amparo_incisos"></label>
+                </div>
+                <label>Valor da Multa (R$): <input type="text" id="valor_multa"></label>
+                <p class="aviso-legal">Prazo de 15 dias para defesa junto à AMMPLA.</p>
+            </fieldset>
 
-    <div class="grid-check-final" style="display: flex; gap: 20px; margin-top: 10px;">
-        <label><input type="checkbox" id="veiculo_recolhido"> Veículo Recolhido</label>
-        <label><input type="checkbox" id="infrator_notificado"> Infrator Notificado no Ato</label>
-    </div>
-</div>
+            <div class="grid-2-col signatures">
+                <div class="bloco-assinatura">
+                    <input type="text" id="fiscal_nome" placeholder="Nome do Fiscal">
+                    <input type="text" id="fiscal_matricula" placeholder="Matrícula">
+                    <small>Fiscal de Transportes - Assinatura</small>
+                </div>
+                <div class="bloco-assinatura">
+                    <input type="text" id="infrator_nome" placeholder="Nome do Infrator">
+                    <small>Infrator - Assinatura</small>
+                </div>
+            </div>
 
             <button type="button" class="btn-validar no-print" onclick="finalizarAuto()">Finalizar e Validar</button>
         </form>
     </div>
 </div>
 
-<div id="aba-lista" class="aba" style="display:none;">
+<div id="aba-lista" class="aba">
     <div class="talao-container">
-        <h2>Autos Preenchidos nesta Aula</h2>
-        <table id="tabela-autos" border="1" style="width:100%; border-collapse: collapse;">
+        <h2>Histórico de Autos (Sessão Atual)</h2>
+        <table id="tabela-autos">
             <thead>
-                <tr style="background: #eee;">
+                <tr>
                     <th>Placa</th>
                     <th>Data/Hora</th>
-                    <th>Local</th>
+                    <th>Infração</th>
+                    <th>Fiscal</th>
                 </tr>
             </thead>
             <tbody id="lista-corpo"></tbody>

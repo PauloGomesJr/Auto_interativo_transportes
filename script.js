@@ -1,74 +1,108 @@
+/**
+ * SIMULADOR DE AUTO DE INFRAÇÃO - AMMPLA
+ * Desenvolvido para fins didáticos.
+ */
+
+let historicoAutos = [];
+
+/**
+ * Gerencia a troca de abas da aplicação
+ */
+function mudarAba(abaId) {
+    // Remove classe ativa de todas as abas
+    document.querySelectorAll('.aba').forEach(aba => aba.classList.remove('active'));
+    // Ativa a aba selecionada
+    document.getElementById('aba-' + abaId).classList.add('active');
+}
+
+/**
+ * Validação e Processamento do Auto
+ */
 function finalizarAuto() {
-    const camposObrigatorios = [
-        { id: 'categoria_transporte', nome: '01. Categoria do Transporte' },
-        { id: 'modelo', nome: '01. Modelo' },
-        { id: 'placa', nome: '01. Placa' },
-        { id: 'num_ordem', nome: '01. Nº da Ordem' },
-        { id: 'empresa', nome: '02. Empresa/Condutor' },
-        { id: 'local', nome: '03. Local da Infração' },
-        { id: 'data', nome: '03. Data' },
-        { id: 'hora', nome: '03. Hora' },
-        { id: 'empresa', nome: '02. Empresa/Autorizatário/Condutor' },
-        { id: 'cnh', nome: '02. CNH' },
-        { id: 'cat_cnh', nome: '02. Categoria da CNH' }
+    // Lista de campos obrigatórios conforme o modelo AMMPLA
+    const obrigatorios = [
+        { id: 'categoria_transporte', nome: 'Categoria do Transporte' },
+        { id: 'placa', nome: 'Placa do Veículo' },
+        { id: 'num_ordem', nome: 'Nº da Ordem' },
+        { id: 'empresa', nome: 'Empresa/Condutor' },
+        { id: 'local', nome: 'Local da Infração' },
+        { id: 'data', nome: 'Data' },
+        { id: 'hora', nome: 'Hora' },
+        { id: 'amparo_ato', nome: 'Amparo Legal (Ato)' },
+        { id: 'fiscal_nome', nome: 'Nome do Fiscal' },
+        { id: 'fiscal_matricula', nome: 'Matrícula do Fiscal' }
     ];
 
     let erros = [];
 
-    camposObrigatorios.forEach(campo => {
-        const elemento = document.getElementById(campo.id);
-        if (!elemento.value.trim()) {
+    // 1. Validar campos de texto e select
+    obrigatorios.forEach(campo => {
+        const input = document.getElementById(campo.id);
+        if (!input.value.trim()) {
             erros.push(campo.nome);
-            elemento.style.backgroundColor = "#ffeaa7"; // Destaque suave em amarelo
+            input.parentElement.style.color = "red"; // Alerta visual no label
         } else {
-            elemento.style.backgroundColor = "transparent";
+            input.parentElement.style.color = "inherit";
         }
     });
 
+    // 2. Validar se uma infração foi selecionada (Radio Button)
+    const infracaoCheck = document.querySelector('input[name="infracao"]:checked');
+    if (!infracaoCheck) {
+        erros.push("Seleção da Infração (Seção 04)");
+    }
+
+    // 3. Exibir alertas se houver erros
     if (erros.length > 0) {
-        alert("⚠️ ERRO DE PREENCHIMENTO\n\nTodos os campos de identificação devem ser preenchidos:\n\n- " + erros.join("\n- "));
+        alert("⚠️ ATENÇÃO: Campos obrigatórios não preenchidos!\n\n- " + erros.join("\n- "));
         return;
     }
 
-    // Se passar na validação, executa o restante...
-    alert("Auto validado com sucesso!");
-    salvarNaSessao();
-    window.print();
-
-    const infracaoSelecionada = document.querySelector('input[name="infracao"]:checked');
-    const descricaoTexto = document.getElementById('desc_infracao').value.trim();
-
-    if (!infracaoSelecionada) {
-        alert("⚠️ ERRO: Nenhuma infração foi selecionada na Seção 04.");
-        return;
-    }
-
-    if (infracaoSelecionada.value === "Outros" && descricaoTexto === "") {
-        alert("⚠️ ERRO: Você selecionou 'Outros', mas não descreveu a infração.");
-        return;
-    }
-
-    // Se tudo estiver OK, salvar e imprimir
-    registrarEImprimir();
-}
-
-function confirmarRegistro() {
-    if (confirm("Todos os campos foram preenchidos corretamente. Deseja imprimir o comprovante e salvar na sessão?")) {
-        salvarNaSessao();
-        window.print();
-        document.getElementById('talao-form').reset();
-    }
-}
-
-function salvarNaSessao() {
-    const resumo = {
-        id: Date.now(),
-        placa: document.getElementById('placa').value,
-        infracao: document.getElementById('tipificacao').value,
-        data: document.getElementById('data').value
+    // 4. Se validado, salvar objeto no histórico
+    const autoAtual = {
+        placa: document.getElementById('placa').value.toUpperCase(),
+        data: document.getElementById('data').value,
+        hora: document.getElementById('hora').value,
+        infracao: infracaoCheck.value,
+        fiscal: document.getElementById('fiscal_nome').value
     };
+
+    historicoAutos.push(autoAtual);
+    atualizarTabela();
+
+    // 5. Feedback de sucesso e impressão
+    alert("✅ Auto validado e registrado no histórico!");
+    window.print();
     
-    let historico = JSON.parse(sessionStorage.getItem('autos')) || [];
-    historico.push(resumo);
-    sessionStorage.setItem('autos', JSON.stringify(historico));
+    // Limpar formulário para o próximo aluno
+    document.getElementById('talao-form').reset();
+}
+
+/**
+ * Atualiza a tabela de histórico na Aba 2
+ */
+function atualizarTabela() {
+    const corpoTabela = document.getElementById('lista-corpo');
+    corpoTabela.innerHTML = ""; // Limpa para renderizar atualizado
+
+    historicoAutos.forEach(auto => {
+        const linha = `
+            <tr>
+                <td><strong>${auto.placa}</strong></td>
+                <td>${formatarData(auto.data)} - ${auto.hora}</td>
+                <td>${auto.infracao}</td>
+                <td>${auto.fiscal}</td>
+            </tr>
+        `;
+        corpoTabela.innerHTML += linha;
+    });
+}
+
+/**
+ * Auxiliar para formatar data BR
+ */
+function formatarData(dataISO) {
+    if(!dataISO) return "";
+    const [ano, mes, dia] = dataISO.split('-');
+    return `${dia}/${mes}/${ano}`;
 }
