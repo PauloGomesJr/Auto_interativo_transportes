@@ -23,7 +23,6 @@
         <form id="talao-form">
             <fieldset class="secao">
                 <legend class="secao-titulo">01-IDENTIFICAÇÃO DO VEÍCULO</legend>
-                
                 <div class="campo-full">
                     <label>Categoria do Transporte:</label>
                     <select id="categoria_transporte">
@@ -38,7 +37,6 @@
                         <option value="Outros">Outros</option>
                     </select>
                 </div>
-
                 <div class="grid-3-col">
                     <label>Modelo: <input type="text" id="modelo"></label>
                     <label>Marca: <input type="text" id="marca"></label>
@@ -51,17 +49,35 @@
             </fieldset>
 
             <fieldset class="secao">
+                <legend class="secao-titulo">02-IDENTIFICAÇÃO DA EMPRESA/CONDUTOR</legend>
+                <div class="campo-full">
+                    <label>Empresa/Autorizatário/Condutor:</label>
+                    <input type="text" id="empresa">
+                </div>
+                <div class="grid-2-col">
+                    <div>
+                        <label>CNH:</label>
+                        <input type="text" id="cnh">
+                    </div>
+                    <div>
+                        <label>Categoria:</label>
+                        <input type="text" id="cat_cnh">
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset class="secao">
                 <legend class="secao-titulo">03-LOCAL E DATA DA INFRAÇÃO</legend>
                 <div class="grid-local-expandido">
-                    <div class="campo-local">
+                    <div>
                         <label>Local da Infração:</label>
-                        <input type="text" id="local" placeholder="Ex: Av. Sete de Setembro, esq. com Rua da Paz">
+                        <input type="text" id="local">
                     </div>
-                    <div class="campo-data">
+                    <div>
                         <label>Data:</label>
                         <input type="date" id="data">
                     </div>
-                    <div class="campo-hora">
+                    <div>
                         <label>Hora:</label>
                         <input type="time" id="hora">
                     </div>
@@ -73,19 +89,11 @@
                 <div class="lista-infracoes">
                     <label><input type="radio" name="infracao" value="S/ Autorização"> Transporte remunerado sem autorização</label>
                     <label><input type="radio" name="infracao" value="Atraso"> Realizar viagem com atraso</label>
-                    <label><input type="radio" name="infracao" value="Itinerário"> Descumprir itinerário da OSO</label>
-                    <label><input type="radio" name="infracao" value="Vistoria"> Certificado de vistoria vencido</label>
-                    <label><input type="radio" name="infracao" value="Urbanidade"> Falta de urbanidade com passageiro</label>
-                    <label><input type="radio" name="infracao" value="Segurança"> Veículo sem condições de segurança</label>
-                    <label><input type="radio" name="infracao" value="Porta Aberta"> Transitar com porta aberta</label>
+                    <label><input type="radio" name="infracao" value="Vistoria"> Vistoria vencida</label>
+                    <label><input type="radio" name="infracao" value="Porta Aberta"> Porta aberta</label>
                     <label><input type="radio" name="infracao" value="Outros"> Outros:</label>
                 </div>
-                <textarea id="desc_infracao" rows="3" placeholder="Descrição detalhada..."></textarea>
-                
-                <div class="flex-row">
-                    <label><input type="checkbox" id="veiculo_recolhido"> Veículo Recolhido</label>
-                    <label><input type="checkbox" id="infrator_notificado"> Infrator Notificado</label>
-                </div>
+                <textarea id="desc_infracao" rows="3" placeholder="Descrição detalhada da infração..."></textarea>
             </fieldset>
 
             <fieldset class="secao">
@@ -95,8 +103,7 @@
                     <label>Artigos: <input type="text" id="amparo_artigos"></label>
                     <label>Incisos: <input type="text" id="amparo_incisos"></label>
                 </div>
-                <label>Valor da Multa (R$): <input type="text" id="valor_multa"></label>
-                <p class="aviso-legal">Prazo de 15 dias para defesa junto à AMMPLA.</p>
+                <p class="aviso-legal">O infrator dispõe de 15 dias para dirigir defesa à AMMPLA.</p>
             </fieldset>
 
             <div class="grid-2-col signatures">
@@ -107,7 +114,7 @@
                 </div>
                 <div class="bloco-assinatura">
                     <input type="text" id="infrator_nome" placeholder="Nome do Infrator">
-                    <small>Infrator - Assinatura</small>
+                    <small>Ciente da Autuação - Assinatura</small>
                 </div>
             </div>
 
@@ -118,7 +125,7 @@
 
 <div id="aba-lista" class="aba">
     <div class="talao-container">
-        <h2>Histórico de Autos (Sessão Atual)</h2>
+        <h2>Histórico da Sessão</h2>
         <table id="tabela-autos">
             <thead>
                 <tr>

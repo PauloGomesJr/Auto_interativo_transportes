@@ -1,108 +1,71 @@
-/**
- * SIMULADOR DE AUTO DE INFRAÇÃO - AMMPLA
- * Desenvolvido para fins didáticos.
- */
-
 let historicoAutos = [];
 
-/**
- * Gerencia a troca de abas da aplicação
- */
 function mudarAba(abaId) {
-    // Remove classe ativa de todas as abas
     document.querySelectorAll('.aba').forEach(aba => aba.classList.remove('active'));
-    // Ativa a aba selecionada
-    document.getElementById('aba-' + abaId).classList.add('active');
+    const selecionada = document.getElementById('aba-' + abaId);
+    if (selecionada) selecionada.classList.add('active');
 }
 
-/**
- * Validação e Processamento do Auto
- */
 function finalizarAuto() {
-    // Lista de campos obrigatórios conforme o modelo AMMPLA
-    const obrigatorios = [
-        { id: 'categoria_transporte', nome: 'Categoria do Transporte' },
-        { id: 'placa', nome: 'Placa do Veículo' },
-        { id: 'num_ordem', nome: 'Nº da Ordem' },
-        { id: 'empresa', nome: 'Empresa/Condutor' },
-        { id: 'local', nome: 'Local da Infração' },
-        { id: 'data', nome: 'Data' },
-        { id: 'hora', nome: 'Hora' },
-        { id: 'amparo_ato', nome: 'Amparo Legal (Ato)' },
-        { id: 'fiscal_nome', nome: 'Nome do Fiscal' },
-        { id: 'fiscal_matricula', nome: 'Matrícula do Fiscal' }
+    // Lista completa de IDs para validação rigorosa
+    const camposId = [
+        'categoria_transporte', 'modelo', 'placa', 'num_ordem', 
+        'empresa', 'cnh', 'cat_cnh', 'local', 'data', 'hora',
+        'amparo_ato', 'fiscal_nome', 'fiscal_matricula'
     ];
 
     let erros = [];
 
-    // 1. Validar campos de texto e select
-    obrigatorios.forEach(campo => {
-        const input = document.getElementById(campo.id);
-        if (!input.value.trim()) {
-            erros.push(campo.nome);
-            input.parentElement.style.color = "red"; // Alerta visual no label
+    // Validação de preenchimento
+    camposId.forEach(id => {
+        const campo = document.getElementById(id);
+        if (!campo || !campo.value.trim()) {
+            erros.push(id);
+            if (campo) campo.style.borderBottom = "2px solid #d63031";
         } else {
-            input.parentElement.style.color = "inherit";
+            if (campo) campo.style.borderBottom = "1px solid #000";
         }
     });
 
-    // 2. Validar se uma infração foi selecionada (Radio Button)
-    const infracaoCheck = document.querySelector('input[name="infracao"]:checked');
-    if (!infracaoCheck) {
-        erros.push("Seleção da Infração (Seção 04)");
-    }
-
-    // 3. Exibir alertas se houver erros
-    if (erros.length > 0) {
-        alert("⚠️ ATENÇÃO: Campos obrigatórios não preenchidos!\n\n- " + erros.join("\n- "));
+    // Validação da Seção 04 (Radio)
+    const infracao = document.querySelector('input[name="infracao"]:checked');
+    if (!infracao) {
+        erros.push("Seleção da Infração");
+        alert("⚠️ Selecione uma infração na Seção 04.");
         return;
     }
 
-    // 4. Se validado, salvar objeto no histórico
-    const autoAtual = {
+    if (erros.length > 0) {
+        alert("⚠️ ATENÇÃO: Preencha todos os campos destacados para validar o auto.");
+        return;
+    }
+
+    // Gravação no histórico da aula
+    const auto = {
         placa: document.getElementById('placa').value.toUpperCase(),
         data: document.getElementById('data').value,
         hora: document.getElementById('hora').value,
-        infracao: infracaoCheck.value,
+        infracao: infracao.value,
         fiscal: document.getElementById('fiscal_nome').value
     };
 
-    historicoAutos.push(autoAtual);
+    historicoAutos.push(auto);
     atualizarTabela();
-
-    // 5. Feedback de sucesso e impressão
-    alert("✅ Auto validado e registrado no histórico!");
-    window.print();
     
-    // Limpar formulário para o próximo aluno
+    alert("✅ Auto validado e registrado!");
+    window.print();
     document.getElementById('talao-form').reset();
 }
 
-/**
- * Atualiza a tabela de histórico na Aba 2
- */
 function atualizarTabela() {
-    const corpoTabela = document.getElementById('lista-corpo');
-    corpoTabela.innerHTML = ""; // Limpa para renderizar atualizado
-
-    historicoAutos.forEach(auto => {
-        const linha = `
-            <tr>
-                <td><strong>${auto.placa}</strong></td>
-                <td>${formatarData(auto.data)} - ${auto.hora}</td>
-                <td>${auto.infracao}</td>
-                <td>${auto.fiscal}</td>
-            </tr>
-        `;
-        corpoTabela.innerHTML += linha;
-    });
-}
-
-/**
- * Auxiliar para formatar data BR
- */
-function formatarData(dataISO) {
-    if(!dataISO) return "";
-    const [ano, mes, dia] = dataISO.split('-');
-    return `${dia}/${mes}/${ano}`;
+    const corpo = document.getElementById('lista-corpo');
+    if (!corpo) return;
+    corpo.innerHTML = historicoAutos.map(a => `
+        <tr>
+            <td>${a.placa}</td>
+            <td>${a.data} às ${a.hora}</td>
+            <td>${a.infracao}</td>
+            <td>${a.fiscal}</td>
+        </tr>
+    `).join('');
 }

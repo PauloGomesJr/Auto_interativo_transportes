@@ -40,6 +40,19 @@ body { font-family: Arial, sans-serif; background-color: #dfe6e9; padding: 20px;
     font-weight: bold;
 }
 
+/* Ajustes para Seção 02 */
+.campo-full {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+/* Garante que o grid de 2 colunas da CNH/Categoria seja proporcional */
+.secao .grid-2-col {
+    display: grid;
+    grid-template-columns: 2fr 1fr; /* CNH maior que a Categoria */
+    gap: 15px;
+}
+
 /* Campos de Entrada */
 label { font-size: 0.8rem; font-weight: bold; display: block; margin-top: 5px; }
 input { border: none; border-bottom: 1px solid #000; width: 100%; padding: 4px 0; font-family: 'Courier New', monospace; font-size: 1rem; outline: none; }
