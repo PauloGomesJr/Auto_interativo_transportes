@@ -95,7 +95,15 @@
                     <label><input type="radio" name="infracao" value="Porta Aberta"> Transitar o veículo com porta aberta</label>
                     <label><input type="radio" name="infracao" value="Outros"> Outros:</label>
                 </div>
-                <textarea id="desc_infracao" rows="3" placeholder="Descrição detalhada da infração..."></textarea>
+                    <textarea id="desc_infracao" rows="3" placeholder="Descrição detalhada da infração..."></textarea>
+                    <div class="flex-row" style="border-top: 1px solid #000; padding-top: 10px;">
+                    <label style="display: flex; align-items: center; gap: 8px;">
+                    <input type="checkbox" id="veiculo_recolhido"> Veículo Recolhido [cite: 51]
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 8px;">
+                    <input type="checkbox" id="infrator_notificado"> Infrator Notificado no Ato [cite: 62]
+                    </label>
+                    </div>
             </fieldset>
 
             <fieldset class="secao">

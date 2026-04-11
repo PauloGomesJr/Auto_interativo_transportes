@@ -57,7 +57,9 @@ function finalizarAuto() {
         data: document.getElementById('data').value,
         hora: document.getElementById('hora').value,
         infracao: infracao.value,
-        fiscal: document.getElementById('fiscal_nome').value
+        fiscal: document.getElementById('fiscal_nome').value,
+        recolhido: document.getElementById('veiculo_recolhido').checked ? "SIM" : "NÃO",
+        notificado: document.getElementById('infrator_notificado').checked ? "SIM" : "NÃO"
     };
 
     historicoAutos.push(auto);
