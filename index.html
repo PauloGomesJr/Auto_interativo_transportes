@@ -85,26 +85,31 @@
             </fieldset>
 
             <fieldset class="secao">
-                <legend class="secao-titulo">04-TIPIFICAÇÃO DA INFRAÇÃO</legend>
-                <div class="lista-infracoes">
-                    <label><input type="radio" name="infracao" value="S/ Autorização"> Transporte remunerado sem autorização</label>
-                    <label><input type="radio" name="infracao" value="Atraso"> Realizar viagem com atraso</label>
-                    <label><input type="radio" name="infracao" value="Vistoria"> Vistoria vencida</label>
-                    <label><input type="radio" name="infracao" value="Urbanidade"> Falta de urbanidade com passageiro ou fiscalização</label>
-                    <label><input type="radio" name="infracao" value="Segurança"> Veículo sem condições de segurança</label>
-                    <label><input type="radio" name="infracao" value="Porta Aberta"> Transitar o veículo com porta aberta</label>
-                    <label><input type="radio" name="infracao" value="Outros"> Outros:</label>
-                </div>
-                    <textarea id="desc_infracao" rows="3" placeholder="Descrição detalhada da infração..."></textarea>
-                    <div class="flex-row" style="border-top: 1px solid #000; padding-top: 10px;">
-                    <label style="display: flex; align-items: center; gap: 8px;">
-                    <input type="checkbox" id="veiculo_recolhido"> Veículo Recolhido
-                    </label>
-                    <label style="display: flex; align-items: center; gap: 8px;">
-                    <input type="checkbox" id="infrator_notificado"> Infrator Notificado no Ato
-                    </label>
-                    </div>
-            </fieldset>
+    <legend class="secao-titulo">04-TIPIFICAÇÃO DA INFRAÇÃO</legend>
+    <div class="lista-infracoes">
+        <label><input type="radio" name="infracao" value="Serviço s/ autorização"> Executar serviço de transporte remunerado de passageiros, sem autorização do poder público</label>
+        <label><input type="radio" name="infracao" value="Atraso"> Deixar de realizar viagem ou realizá-la com atraso</label>
+        <label><input type="radio" name="infracao" value="Itinerário OSO"> Deixar de cumprir os itinerários estabelecidos na OSO</label>
+        <label><input type="radio" name="infracao" value="Vistoria vencida"> Transitar com veículo com certificado de cadastro ou de vistoria vencido</label>
+        <label><input type="radio" name="infracao" value="Doc. Porte Obrigatório"> Transitar sem os documentos de porte obrigatório exigidos</label>
+        <label><input type="radio" name="infracao" value="Equip. Defeituoso"> Operar com veículo com equipamento de iluminação interna, letreiro, campainha e descarga defeituosos</label>
+        <label><input type="radio" name="infracao" value="Falta urbanidade"> Tratar com falta de urbanidade passageiro ou pessoal de operação e fiscalização</label>
+        <label><input type="radio" name="infracao" value="Danos físicos veículo"> Colocar em operação veículos com vidros, janelas ou portas quebradas ou bancos danificados</label>
+        <label><input type="radio" name="infracao" value="Descumprir determinação"> Deixar de cumprir as determinações do poder público</label>
+        <label><input type="radio" name="infracao" value="Sinal de parada"> Deixar de atender ao sinal de parada para embarque ou desembarque</label>
+        <label><input type="radio" name="infracao" value="Sem segurança"> Colocar em operação veículo que não apresenta condições de segurança</label>
+        <label><input type="radio" name="infracao" value="Equip. Obrigatório defeito"> Operar veículo com equipamentos obrigatórios com defeito, ausente ou inoperante</label>
+        <label><input type="radio" name="infracao" value="Dirigir inadequadamente"> Dirigir inadequadamente, pondo em risco a vida de pessoas ou motoristas</label>
+        <label><input type="radio" name="infracao" value="Porta aberta"> Transitar o veículo com porta aberta</label>
+        <label><input type="radio" name="infracao" value="Outros" id="radio-outros"> Outros:</label>
+    </div>
+    <textarea id="desc_infracao" rows="3" placeholder="Descrição detalhada..."></textarea>
+    
+    <div class="flex-row">
+        <label><input type="checkbox" id="veiculo_recolhido"> Veículo Recolhido</label>
+        <label><input type="checkbox" id="infrator_notificado"> Infrator Notificado no Ato</label>
+    </div>
+</fieldset>
 
             <fieldset class="secao">
                 <legend class="secao-titulo">05-AMPARO LEGAL</legend>
