@@ -60,8 +60,29 @@ select { width: 100%; padding: 5px; margin-top: 5px; border: 1px solid #ccc; }
 textarea { width: 100%; border: none; background: repeating-linear-gradient(transparent, transparent 23px, #dfe6e9 24px); line-height: 24px; font-family: 'Courier New', monospace; resize: none; margin: 10px 0; }
 
 /* Tipificação */
-.lista-infracoes { font-size: 0.8rem; display: flex; flex-direction: column; gap: 4px; }
-.flex-row { display: flex; gap: 20px; margin-top: 10px; font-size: 0.8rem; }
+/* Ajuste de alinhamento para a Seção 04 */
+.lista-infracoes {
+    display: flex;
+    flex-direction: column;
+    gap: 8px; /* Espaço entre cada linha de infração */
+    margin-bottom: 10px;
+}
+
+.lista-infracoes label {
+    display: flex;
+    align-items: center; /* Alinha o texto verticalmente ao centro do radio */
+    gap: 10px; /* Espaço entre o botão e o texto */
+    font-size: 0.85rem;
+    font-weight: normal; /* Mantém o texto das infrações mais leve que os títulos */
+    cursor: pointer;
+}
+
+.lista-infracoes input[type="radio"] {
+    width: auto; /* Garante que o radio não herde larguras de 100% */
+    margin: 0;
+    cursor: pointer;
+}
+/*.flex-row { display: flex; gap: 20px; margin-top: 10px; font-size: 0.8rem; }*/
 
 /* Notas e Assinaturas */
 .aviso-legal { font-size: 0.7rem; color: #d63031; text-align: center; font-weight: bold; border: 1px solid #d63031; padding: 5px; margin-top: 10px; }
