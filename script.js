@@ -11,8 +11,12 @@ let historicoAutos = [];
 function mudarAba(abaId) {
     document.querySelectorAll('.aba').forEach(aba => aba.classList.remove('active'));
     const selecionada = document.getElementById('aba-' + abaId);
-    if (selecionada) selecionada.classList.add('active');
+    if (selecionada) {
+        selecionada.classList.add('active');
+        window.scrollTo(0, 0); // <-- Adicione isso: Sobe a página ao trocar de aba
+    }
 }
+
 
 /**
  * Valida o preenchimento, registra no histórico e gera a impressão

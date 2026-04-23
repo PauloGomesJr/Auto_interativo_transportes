@@ -131,3 +131,60 @@ th { background-color: #f1f2f6; }
 
 /* Impressão */
 @media print { .no-print, nav { display: none !important; } .talao-container { border: none; box-shadow: none; } body { padding: 0; background: white; } }
+
+/* --- RESPONSIVIDADE PARA DISPOSITIVOS MÓVEIS --- */
+
+@media (max-width: 768px) {
+    body {
+        padding: 10px; /* Reduz o respiro lateral em telas pequenas */
+    }
+
+    .talao-container {
+        padding: 15px;
+        width: 100%; /* Ocupa a largura total disponível */
+    }
+
+    /* Transforma todos os Grids em uma única coluna */
+    .grid-3-col, 
+    .grid-2-col, 
+    .grid-local-expandido, 
+    .grid-fiscal, 
+    .grid-amparo,
+    .signatures.grid-2-col {
+        grid-template-columns: 1fr !important; 
+        gap: 10px;
+    }
+
+    /* Ajusta os botões de navegação para não ficarem muito pequenos */
+    nav {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    nav button {
+        width: 100%;
+        padding: 15px;
+    }
+
+    /* Aumenta a área de toque dos botões de rádio e infrações */
+    .lista-infracoes label {
+        padding: 8px 0;
+        font-size: 1rem; /* Texto levemente maior para leitura no celular */
+    }
+
+    /* Medidas Administrativas em coluna */
+    .flex-row {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    /* Tabela de histórico com rolagem horizontal para não quebrar o layout */
+    #aba-lista .talao-container {
+        overflow-x: auto;
+    }
+
+    table {
+        min-width: 600px; /* Garante que a tabela não "esprema" os dados */
+    }
+}
