@@ -1,6 +1,6 @@
 /**
- * SIMULADOR AMMPLA - Lógica de Validação e Histórico de Sessão
- * Foco: Didática para novos servidores e agentes de trânsito
+ * SIMULADOR de AUTO DE INFRAÇÃO DE TRANSPORTES AMMPLA - Lógica de Validação e Histórico de Sessão
+ * Foco: Didática para novos servidores agentes de trânsito e transporte em Petrolina/PE
  */
 
 let historicoAutos = [];
@@ -13,16 +13,36 @@ function mudarAba(abaId) {
     const selecionada = document.getElementById('aba-' + abaId);
     if (selecionada) {
         selecionada.classList.add('active');
-        window.scrollTo(0, 0); // <-- Adicione isso: Sobe a página ao trocar de aba
+        // Garante que a página suba ao topo para melhor experiência mobile
+        window.scrollTo(0, 0); 
     }
 }
 
+/**
+ * Funções para o Alerta Customizado (Substitui o alert nativo)
+ */
+function exibirAlerta(titulo, mensagem, tipo = 'erro') {
+    const modal = document.getElementById('custom-alert');
+    const icon = tipo === 'erro' ? '⚠️' : '✅';
+    
+    document.getElementById('alert-icon').innerText = icon;
+    document.getElementById('alert-title').innerText = titulo;
+    document.getElementById('alert-message').innerText = mensagem;
+    
+    // Aplica a classe de estilo baseada no tipo (sucesso ou erro)
+    modal.className = 'modal-alert ' + (tipo === 'erro' ? 'alerta-erro' : 'alerta-sucesso');
+    modal.style.display = 'block';
+}
+
+function fecharAlerta() {
+    document.getElementById('custom-alert').style.display = 'none';
+}
 
 /**
  * Valida o preenchimento, registra no histórico e gera a impressão
  */
 function finalizarAuto() {
-    // Lista de campos estritamente obrigatórios (num_ordem removido para ser opcional)
+    // Lista de campos estritamente obrigatórios
     const camposObrigatorios = [
         'categoria_transporte', 'modelo', 'placa', 
         'empresa', 'cnh', 'cat_cnh', 'local', 'data', 'hora',
@@ -31,7 +51,7 @@ function finalizarAuto() {
 
     let erros = [];
 
-    // 1. Validação de preenchimento dos campos obrigatórios
+    // 1. Validação de preenchimento
     camposObrigatorios.forEach(id => {
         const campo = document.getElementById(id);
         if (!campo || !campo.value.trim()) {
@@ -45,13 +65,17 @@ function finalizarAuto() {
     // 2. Validação da Tipificação (Radio Buttons da Seção 04)
     const infracao = document.querySelector('input[name="infracao"]:checked');
     if (!infracao) {
-        alert("⚠️ ATENÇÃO: Selecione uma infração na Seção 04.");
+        exibirAlerta("Seção 04 Pendente", "Selecione uma infração para tipificar o auto.", "erro");
         return;
     }
 
     // 3. Verificação de erros acumulados
     if (erros.length > 0) {
-        alert("⚠️ ATENÇÃO: Preencha todos os campos destacados para validar o auto. (Nº da Ordem é opcional)");
+        exibirAlerta(
+            "Auto Incompleto", 
+            "Preencha todos os campos destacados para evitar nulidade. (Nº da Ordem é opcional)", 
+            "erro"
+        );
         return;
     }
 
@@ -69,16 +93,20 @@ function finalizarAuto() {
     historicoAutos.push(auto);
     atualizarTabela();
     
-    // 5. Feedback, Impressão e Reset do Formulário
-    alert("✅ Auto validado e registrado com sucesso!");
-    window.print();
-    document.getElementById('talao-form').reset();
+    // 5. Feedback amigável e Impressão
+    exibirAlerta("Sucesso!", "Auto validado e registrado no histórico da aula.", "sucesso");
     
-    // Reseta visualmente as bordas vermelhas após o reset do form
-    camposObrigatorios.forEach(id => {
-        const campo = document.getElementById(id);
-        if (campo) campo.style.borderBottom = "1px solid #000";
-    });
+    // Pequeno delay na impressão para permitir que o usuário veja o alerta de sucesso
+    setTimeout(() => {
+        window.print();
+        document.getElementById('talao-form').reset();
+        
+        // Reseta as bordas após o reset do formulário
+        camposObrigatorios.forEach(id => {
+            const campo = document.getElementById(id);
+            if (campo) campo.style.borderBottom = "1px solid #000";
+        });
+    }, 1000);
 }
 
 /**
