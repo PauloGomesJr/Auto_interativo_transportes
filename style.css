@@ -237,3 +237,40 @@ th { background-color: #f1f2f6; }
 /* Cores por tipo de alerta */
 .alerta-erro #alert-icon { color: #d63031; }
 .alerta-sucesso #alert-icon { color: #2ecc71; }
+
+/* --- CONFIGURAÇÃO DA MARCA D'ÁGUA --- */
+
+/* Esconde a marca d'água na tela do computador/celular */
+.no-screen {
+    display: none;
+}
+
+@media print {
+    /* Força a exibição da marca d'água apenas na impressão/PDF */
+    .watermark.no-screen {
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) rotate(-45deg);
+        font-size: 5rem;
+        font-weight: bold;
+        color: rgba(100, 100, 100, 0.15); /* Cor cinza clara e transparente */
+        z-index: 0; /* Fica no fundo */
+        pointer-events: none;
+        white-space: nowrap;
+    }
+
+    /* Prepara o container para receber a marca d'água no fundo */
+    .talao-container {
+        position: relative;
+        z-index: 1;
+        overflow: hidden; /* Evita que a marca d'água vaze da borda do auto */
+    }
+
+    /* Força os navegadores a imprimirem as cores de fundo (backgrounds) corretamente */
+    body {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+}
