@@ -113,8 +113,7 @@ function atualizarTabela() {
             <td><strong>${a.placa}</strong></td>
             <td>${formatarData(a.data)} às ${a.hora}</td>
             <td>${a.infracao}</td>
-            <td>${a.fiscal}</td>
-            <td class="no-print">
+            <td>${a.fiscal_nome}</td> <td class="no-print">
                 <button onclick="editarAuto(${index})" class="btn-acao btn-editar">✏️ Editar</button>
                 <button onclick="imprimirAuto(${index})" class="btn-acao btn-imprimir">🖨️ 2ª Via</button>
             </td>
