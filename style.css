@@ -179,13 +179,73 @@ th { background-color: #f1f2f6; }
         gap: 15px;
     }
 
-    /* Tabela de histórico com rolagem horizontal para não quebrar o layout */
+    /* --- Tabela Responsiva (Formato de Cartões) --- */
     #aba-lista .talao-container {
-        overflow-x: auto;
+        overflow-x: hidden;
+        padding: 10px;
     }
 
-    table {
-        min-width: 600px; /* Garante que a tabela não "esprema" os dados */
+    /* Transforma a tabela padrão em blocos */
+    table, thead, tbody, th, td, tr {
+        display: block;
+        width: 100%;
+    }
+
+    /* Esconde o cabeçalho original visualmente */
+    thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+    /* Estiliza cada linha como um cartão isolado */
+    tr {
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        margin-bottom: 15px;
+        background: #fff;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    /* Configura as células para receberem os falsos rótulos */
+    td {
+        border: none;
+        border-bottom: 1px solid #eee;
+        position: relative;
+        padding: 10px 10px 10px 40%; /* 40% de espaço à esquerda para o rótulo */
+        text-align: right; /* Joga o dado preenchido para a direita */
+        min-height: 40px;
+    }
+
+    td:last-child {
+        border-bottom: none;
+        text-align: center;
+        padding: 10px; /* Centraliza os botões */
+    }
+
+    /* Cria os rótulos (Placa, Data, etc) dinamicamente via CSS */
+    td::before {
+        position: absolute;
+        left: 10px;
+        top: 10px;
+        width: 35%;
+        text-align: left;
+        font-weight: bold;
+        white-space: nowrap;
+    }
+
+    /* Associa os rótulos a cada coluna específica */
+    td:nth-of-type(1)::before { content: "Placa:"; }
+    td:nth-of-type(2)::before { content: "Data/Hora:"; }
+    td:nth-of-type(3)::before { content: "Infração:"; }
+    td:nth-of-type(4)::before { content: "Fiscal:"; }
+
+    /* Ajusta os botões de ação para ficarem lado a lado no cartão */
+    .btn-acao {
+        width: 47%;
+        margin: 1%;
+        padding: 12px;
+        font-size: 0.9rem;
     }
 }
 
