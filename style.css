@@ -209,18 +209,21 @@ th { background-color: #f1f2f6; }
 
     /* Configura as células para receberem os falsos rótulos */
     td {
+        box-sizing: border-box; /* ESSENCIAL: Impede que o padding expanda a célula para fora da tela */
         border: none;
         border-bottom: 1px solid #eee;
         position: relative;
-        padding: 10px 10px 10px 40%; /* 40% de espaço à esquerda para o rótulo */
-        text-align: right; /* Joga o dado preenchido para a direita */
+        padding: 10px 10px 10px 35%; /* Espaço à esquerda para o rótulo */
+        text-align: left; /* Alinhado à esquerda facilita leitura de infrações longas */
         min-height: 40px;
+        word-wrap: break-word; /* Garante que o texto quebre a linha se for muito longo */
     }
 
     td:last-child {
+        box-sizing: border-box;
         border-bottom: none;
         text-align: center;
-        padding: 10px; /* Centraliza os botões */
+        padding: 15px 10px; /* Centraliza os botões e dá mais espaço vertical */
     }
 
     /* Cria os rótulos (Placa, Data, etc) dinamicamente via CSS */
