@@ -305,33 +305,85 @@ th { background-color: #f1f2f6; }
     display: none;
 }
 
+/* --- CONFIGURAÇÃO DE IMPRESSÃO PROFISSIONAL (1 PÁGINA) --- */
 @media print {
-    /* Força a exibição da marca d'água apenas na impressão/PDF */
+    @page {
+        size: A4;
+        margin: 8mm; /* Margens mínimas para aproveitar o papel */
+    }
+
+    body {
+        padding: 0;
+        background: white;
+        font-size: 9pt; /* Reduz a base da fonte para a impressão */
+    }
+
+    /* Esconde elementos desnecessários */
+    .no-print, nav, .btn-validar, .modal-alert {
+        display: none !important;
+    }
+
+    /* Ajusta o container principal */
+    .talao-container {
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+        padding: 10px;
+        border: 1px solid #000;
+        box-shadow: none;
+        position: relative;
+    }
+
+    /* Compacta as seções para caber verticalmente */
+    .secao {
+        margin-bottom: 8px;
+        padding: 8px 10px;
+    }
+
+    .secao-titulo {
+        font-size: 0.7rem;
+        top: -8px;
+        left: 10px;
+    }
+
+    /* Reduz cabeçalho e títulos */
+    .header { margin-bottom: 10px; }
+    .header h1 { font-size: 1.2rem; }
+    .header h2 { font-size: 0.9rem; }
+
+    /* Reduz campos e labels */
+    label { font-size: 0.65rem; margin-top: 2px; }
+    input { font-size: 0.85rem; padding: 1px 0; }
+    textarea { margin: 5px 0; line-height: 20px; font-size: 0.85rem; }
+
+    /* Ajusta a lista de infrações para ocupar menos espaço */
+    .lista-infracoes { gap: 3px; }
+    .lista-infracoes label { font-size: 0.7rem; gap: 5px; }
+    .lista-infracoes input[type="radio"] { width: 12px; height: 12px; }
+
+    /* Assinaturas mais compactas */
+    .signatures { margin-top: 10px; }
+    .bloco-assinatura { padding-top: 2px; }
+
+    /* Ajuste da Marca d'água (2ª Via) */
     .watermark.no-screen {
         display: block;
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%) rotate(-45deg);
-        font-size: 5rem;
+        font-size: 4.5rem;
         font-weight: bold;
-        color: rgba(100, 100, 100, 0.15); /* Cor cinza clara e transparente */
-        z-index: 0; /* Fica no fundo */
-        pointer-events: none;
+        color: rgba(100, 100, 100, 0.1) !important; /* Mais clara para não atrapalhar a leitura */
+        z-index: 0;
         white-space: nowrap;
+        pointer-events: none;
     }
 
-    /* Prepara o container para receber a marca d'água no fundo */
-    .talao-container {
-        position: relative;
-        z-index: 1;
-        overflow: hidden; /* Evita que a marca d'água vaze da borda do auto */
-    }
-
-    /* Força os navegadores a imprimirem as cores de fundo (backgrounds) corretamente */
-    body {
-        -webkit-print-color-adjust: exact;
-        print-color-adjust: exact;
+    /* Força a cor de fundo e bordas nos navegadores */
+    * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
     }
 }
 
