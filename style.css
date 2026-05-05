@@ -133,124 +133,92 @@ th { background-color: #f1f2f6; }
 @media print { .no-print, nav { display: none !important; } .talao-container { border: none; box-shadow: none; } body { padding: 0; background: white; } }
 
 /* --- RESPONSIVIDADE PARA DISPOSITIVOS MÓVEIS --- */
-
-@media (max-width: 768px) {
-    body {
-        padding: 10px; /* Reduz o respiro lateral em telas pequenas */
+/* --- RESPONSIVIDADE PARA DISPOSITIVOS MÓVEIS (APENAS NA TELA) --- */
+/* O termo "screen" impede que o celular imprima o formulário esticado */
+@media screen and (max-width: 768px) {
+    body { padding: 10px; }
+    .talao-container { padding: 15px; width: 100%; }
+    .grid-3-col, .grid-2-col, .grid-local-expandido, .grid-fiscal, .grid-amparo, .signatures.grid-2-col {
+        grid-template-columns: 1fr !important; gap: 10px;
     }
-
-    .talao-container {
-        padding: 15px;
-        width: 100%; /* Ocupa a largura total disponível */
-    }
-
-    /* Transforma todos os Grids em uma única coluna */
-    .grid-3-col, 
-    .grid-2-col, 
-    .grid-local-expandido, 
-    .grid-fiscal, 
-    .grid-amparo,
-    .signatures.grid-2-col {
-        grid-template-columns: 1fr !important; 
-        gap: 10px;
-    }
-
-    /* Ajusta os botões de navegação para não ficarem muito pequenos */
-    nav {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    nav button {
-        width: 100%;
-        padding: 15px;
-    }
-
-    /* Aumenta a área de toque dos botões de rádio e infrações */
-    .lista-infracoes label {
-        padding: 8px 0;
-        font-size: 1rem; /* Texto levemente maior para leitura no celular */
-    }
-
-    /* Medidas Administrativas em coluna */
-    .flex-row {
-        flex-direction: column;
-        gap: 15px;
-    }
-
-   /* --- Tabela Responsiva (Formato de Cartões - App Nativo) --- */
-    #aba-lista .talao-container {
-        overflow-x: hidden;
-        padding: 5px;
-    }
-
-    /* Oculta o cabeçalho original da tabela */
-    thead {
-        display: none;
-    }
-
-    /* Transforma a tabela em um layout de blocos */
-    table, tbody {
-        display: block;
-        width: 100%;
-    }
-
-    /* Cada linha vira um Cartão isolado */
-    tr {
-        display: flex;
-        flex-direction: column;
-        border: 1px solid #ccc;
-        border-radius: 8px;
-        margin-bottom: 15px;
-        background: #fff;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        padding: 10px;
-    }
-
-    /* Estrutura interna das células (Rótulo em cima, Dado embaixo) */
-    td {
-        display: flex;
-        flex-direction: column;
-        border: none;
-        border-bottom: 1px solid #f1f2f6;
-        padding: 8px 5px;
-        text-align: left;
-        word-wrap: break-word; /* Garante que textos longos quebrem a linha */
-        font-size: 0.95rem;
-    }
-
-    /* Container dos botões (Última célula) */
-    td:last-child {
-        flex-direction: row; /* Coloca os botões lado a lado */
-        justify-content: space-between;
-        border-bottom: none;
-        padding-top: 15px;
-    }
-
-    /* Configuração visual dos rótulos (Placa, Infração, etc.) */
-    td::before {
-        font-size: 0.75rem;
-        color: #636e72;
-        text-transform: uppercase;
-        font-weight: bold;
-        margin-bottom: 4px;
-    }
-
-    /* Injeção dos textos dos rótulos */
+    nav { display: flex; flex-direction: column; gap: 10px; }
+    nav button { width: 100%; padding: 15px; }
+    .lista-infracoes label { padding: 8px 0; font-size: 1rem; }
+    .flex-row { flex-direction: column; gap: 15px; }
+    #aba-lista .talao-container { overflow-x: hidden; padding: 5px; }
+    thead { display: none; }
+    table, tbody { display: block; width: 100%; }
+    tr { display: flex; flex-direction: column; border: 1px solid #ccc; border-radius: 8px; margin-bottom: 15px; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.1); padding: 10px; }
+    td { display: flex; flex-direction: column; border: none; border-bottom: 1px solid #f1f2f6; padding: 8px 5px; text-align: left; word-wrap: break-word; font-size: 0.95rem; }
+    td:last-child { flex-direction: row; justify-content: space-between; border-bottom: none; padding-top: 15px; }
+    td::before { font-size: 0.75rem; color: #636e72; text-transform: uppercase; font-weight: bold; margin-bottom: 4px; }
     td:nth-of-type(1)::before { content: "Placa"; }
     td:nth-of-type(2)::before { content: "Data/Hora"; }
     td:nth-of-type(3)::before { content: "Infração"; }
     td:nth-of-type(4)::before { content: "Fiscal"; }
-
-    /* Ajuste de tamanho perfeito para os botões no celular */
-    .btn-acao {
-        width: 48%;
-        margin: 0;
-        padding: 12px;
-        font-size: 0.9rem;
-    }
+    .btn-acao { width: 48%; margin: 0; padding: 12px; font-size: 0.9rem; }
 }
+
+/* --- MODAL DE ALERTA CUSTOMIZADO --- */
+.modal-alert { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.6); backdrop-filter: blur(3px); }
+.modal-content { background-color: #fff; margin: 15% auto; padding: 25px; border-radius: 15px; width: 85%; max-width: 400px; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.3); animation: slideDown 0.3s ease-out; }
+@keyframes slideDown { from { transform: translateY(-50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+#alert-icon { font-size: 50px; display: block; margin-bottom: 10px; }
+#alert-title { margin: 10px 0; color: #2d3436; }
+#alert-message { color: #636e72; line-height: 1.5; margin-bottom: 20px; }
+.modal-content button { background-color: #2ecc71; color: white; border: none; padding: 12px 30px; border-radius: 8px; font-weight: bold; cursor: pointer; width: 100%; }
+.alerta-erro #alert-icon { color: #d63031; }
+.alerta-sucesso #alert-icon { color: #2ecc71; }
+
+/* --- CONFIGURAÇÃO DA MARCA D'ÁGUA --- */
+.no-screen { display: none; }
+
+/* --- CONFIGURAÇÃO DE IMPRESSÃO EXTREMA (GARANTIA DE 1 PÁGINA) --- */
+@media print {
+    @page { size: A4 portrait; margin: 4mm; } /* Margem de 4 milímetros! */
+    body { padding: 0; background: white; font-size: 10px !important; }
+    
+    /* Força os Grids a ficarem lado a lado na impressora, ignorando celular */
+    .grid-3-col { display: grid !important; grid-template-columns: 1fr 1fr 1fr !important; gap: 5px !important; margin-bottom: 2px !important; }
+    .grid-2-col { display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 5px !important; }
+    .grid-local-expandido { display: grid !important; grid-template-columns: 3fr 1fr 1fr !important; gap: 5px !important; }
+    
+    .no-print, nav, .btn-validar, .modal-alert { display: none !important; }
+    .talao-container { width: 100% !important; max-width: 100% !important; margin: 0 !important; padding: 5px !important; border: 1px solid #000; box-shadow: none; position: relative; }
+    
+    /* Compressão agressiva de espaços */
+    .secao { margin-bottom: 4px !important; padding: 6px 8px !important; }
+    .secao-titulo { font-size: 9px !important; top: -7px !important; left: 8px !important; padding: 0 4px !important; }
+    .header { margin-bottom: 5px !important; padding-bottom: 5px !important; }
+    .header h1 { font-size: 14px !important; }
+    .header h2 { font-size: 11px !important; }
+    label { font-size: 9px !important; margin-top: 1px !important; }
+    input, select { font-size: 11px !important; padding: 1px 0 !important; margin: 0 !important; height: auto !important; }
+    textarea { margin: 2px 0 !important; line-height: 14px !important; font-size: 11px !important; height: 35px !important; }
+    .lista-infracoes { gap: 2px !important; margin-bottom: 5px !important; }
+    .lista-infracoes label { font-size: 10px !important; gap: 5px !important; margin: 0 !important; }
+    .lista-infracoes input[type="radio"] { width: 10px !important; height: 10px !important; margin-top: 1px !important; }
+    .flex-row { gap: 15px !important; margin-top: 5px !important; padding-top: 5px !important; }
+    .aviso-legal { font-size: 8px !important; margin-top: 3px !important; padding: 2px !important; }
+    .signatures { margin-top: 8px !important; }
+    .bloco-assinatura { padding-top: 2px !important; }
+    .bloco-assinatura small { font-size: 8px !important; }
+    
+    /* Marca d'água e limpeza de marcações */
+    .watermark.no-screen { display: block !important; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-45deg); font-size: 4rem !important; font-weight: bold; color: rgba(100, 100, 100, 0.1) !important; z-index: 0; white-space: nowrap; pointer-events: none; }
+    * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+    .lista-infracoes label:not(:has(input[type="radio"]:checked)) { display: none !important; }
+    .lista-infracoes label:has(input[type="radio"]:checked) { font-size: 11px !important; font-weight: bold !important; padding: 3px 0 !important; background-color: #f8f9fa !important; border: 1px solid #000 !important; padding-left: 4px !important; }
+    .flex-row label:not(:has(input[type="checkbox"]:checked)) { display: none !important; }
+}
+
+/* --- BOTÕES DE AÇÃO NO HISTÓRICO --- */
+.btn-acao { padding: 6px 12px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; font-size: 0.8rem; margin: 2px; transition: 0.2s; }
+.btn-editar { background-color: #f39c12; color: white; }
+.btn-editar:hover { background-color: #e67e22; }
+.btn-imprimir { background-color: #3498db; color: white; }
+.btn-imprimir:hover { background-color: #2980b9; }
+#tabela-autos td { vertical-align: middle; }
 /* --- MODAL DE ALERTA CUSTOMIZADO --- */
 .modal-alert {
     display: none;
