@@ -250,7 +250,7 @@ th { background-color: #f1f2f6; }
         padding: 12px;
         font-size: 0.9rem;
     }
-    
+}
 /* --- MODAL DE ALERTA CUSTOMIZADO --- */
 .modal-alert {
     display: none;
@@ -386,6 +386,28 @@ th { background-color: #f1f2f6; }
     * {
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
+    }
+
+    /* --- LIMPEZA INTELIGENTE PARA 2ª VIA --- */
+    
+    /* 1. Oculta completamente as infrações que NÃO estão marcadas */
+    .lista-infracoes label:not(:has(input[type="radio"]:checked)) {
+        display: none !important;
+    }
+
+    /* 2. Destaca e aumenta levemente a infração que FOI marcada (já que agora temos espaço) */
+    .lista-infracoes label:has(input[type="radio"]:checked) {
+        font-size: 0.9rem !important;
+        font-weight: bold;
+        padding: 5px 0;
+        background-color: #f8f9fa; /* Dá um fundo sutil para destacar a infração no papel */
+        border: 1px solid #000;
+        padding-left: 5px;
+    }
+
+    /* 3. Opcional: Oculta também as Medidas Administrativas se não foram marcadas */
+    .flex-row label:not(:has(input[type="checkbox"]:checked)) {
+        display: none !important;
     }
 }
 
