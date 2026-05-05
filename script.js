@@ -155,13 +155,12 @@ function imprimirAuto(index) {
     carregarNoFormulario(index);
     mudarAba('form'); // Volta para a tela do formulário para preparar a impressão
     
-    // Aguarda meio segundo para a tela renderizar e chama a impressão
+    // Aguarda um pequeno tempo para a tela renderizar o form e chama a impressão.
+    // NOTA: O código não volta mais para o histórico automaticamente para evitar 
+    // que o celular imprima a aba errada.
     setTimeout(() => {
         window.print();
-        // Após a impressão, limpa a tela e volta para o histórico
-        document.getElementById('talao-form').reset();
-        mudarAba('lista');
-    }, 500);
+    }, 800); 
 }
 
 function formatarData(dataISO) {
