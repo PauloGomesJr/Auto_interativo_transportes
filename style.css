@@ -113,11 +113,12 @@ th { background-color: #f1f2f6; }
 /* ========================================================= */
 @media screen and (max-width: 768px) {
     body { 
-        padding: 10px 4px; 
+        padding: 10px 2px; 
     }
     .talao-container { 
-        padding: 15px 10px; 
+        padding: 15px 8px; 
         width: 100%; 
+        margin: 0 auto;
     }
     .grid-3-col, .grid-2-col, .grid-local-expandido, .grid-fiscal, .grid-amparo, .signatures.grid-2-col { grid-template-columns: 1fr !important; gap: 10px; }
     nav { display: flex; flex-direction: column; gap: 10px; }
