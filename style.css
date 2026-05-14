@@ -93,8 +93,15 @@ th { background-color: #f1f2f6; }
 /* --- RESPONSIVIDADE PARA DISPOSITIVOS MÓVEIS (TELA) --- */
 /* ========================================================= */
 @media screen and (max-width: 768px) {
-    body { padding: 10px; }
-    .talao-container { padding: 15px; width: 100%; }
+   @media screen and (max-width: 768px) {
+    body { 
+        padding: 10px 4px; /* Mantém 10px em cima/baixo, mas reduz a margem cinza lateral para apenas 4px */
+    }
+    .talao-container { 
+        padding: 15px 10px; /* Reduz levemente o espaço em branco interno para dar mais largura aos campos de texto */
+        width: 100%; 
+    }
+    /* ... resto do código continua igual ... */
     .grid-3-col, .grid-2-col, .grid-local-expandido, .grid-fiscal, .grid-amparo, .signatures.grid-2-col { grid-template-columns: 1fr !important; gap: 10px; }
     nav { display: flex; flex-direction: column; gap: 10px; }
     nav button { width: 100%; padding: 15px; }
