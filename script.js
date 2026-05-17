@@ -12,6 +12,12 @@ function mudarAba(abaId) {
         selecionada.classList.add('active');
         window.scrollTo(0, 0); 
     }
+    // Se o utilizador clicar em Novo Auto voluntariamente, garante que o formulário e o número iniciam limpos
+    if (abaId === 'form' && indiceEdicao === null) {
+        document.getElementById('talao-form').reset();
+        const numDoc = document.getElementById('num-auto-doc');
+        if (numDoc) numDoc.innerText = "";
+    }
 }
 
 function exibirAlerta(titulo, mensagem, tipo = 'erro') {
@@ -99,6 +105,8 @@ function finalizarAuto() {
     // Após 1.5s, limpa o formulário e muda para a aba de histórico
     setTimeout(() => {
         document.getElementById('talao-form').reset();
+        const numDoc = document.getElementById('num-auto-doc');
+        if (numDoc) numDoc.innerText = ""; // LIMPA O NÚMERO DO AUTO AQUI
         camposObrigatorios.forEach(id => {
             const campo = document.getElementById(id);
             if (campo) campo.style.borderBottom = "1px solid #000";
@@ -125,9 +133,15 @@ function atualizarTabela() {
     `).join('');
 }
 
-// CARREGA OS DADOS DA MEMÓRIA DE VOLTA PARA O FORMULÁRIO
+/// CARREGA OS DADOS DA MEMÓRIA DE VOLTA PARA O FORMULÁRIO
 function carregarNoFormulario(index) {
     const auto = historicoAutos[index];
+    
+    // EXIBE O NÚMERO DO AUTO NO CABEÇALHO DO DOCUMENTO
+    const numDoc = document.getElementById('num-auto-doc');
+    if (numDoc) {
+        numDoc.innerText = auto.idTalao ? "AIT Nº " + auto.idTalao : "";
+    }
     
     const camposTexto = [
         'categoria_transporte', 'modelo', 'marca', 'placa', 'num_ordem', 'linha', 'cod_linha', 'tp',
