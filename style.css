@@ -132,11 +132,21 @@ th { background-color: #f1f2f6; }
     td { display: flex; flex-direction: column; border: none; border-bottom: 1px solid #f1f2f6; padding: 8px 5px; text-align: left; word-wrap: break-word; font-size: 0.95rem; }
     td:last-child { flex-direction: row; justify-content: space-between; border-bottom: none; padding-top: 15px; }
     td::before { font-size: 0.75rem; color: #636e72; text-transform: uppercase; font-weight: bold; margin-bottom: 4px; }
-    td:nth-of-type(1)::before { content: "Placa"; }
-    td:nth-of-type(2)::before { content: "Data/Hora"; }
-    td:nth-of-type(3)::before { content: "Infração"; }
-    td:nth-of-type(4)::before { content: "Fiscal"; }
+    td:nth-of-type(1)::before { content: "Nº Auto"; color: #d63031; }
+    td:nth-of-type(2)::before { content: "Placa"; }
+    td:nth-of-type(3)::before { content: "Data/Hora"; }
+    td:nth-of-type(4)::before { content: "Infração"; }
+    td:nth-of-type(5)::before { content: "Fiscal"; }
     .btn-acao { width: 48%; margin: 0; padding: 12px; font-size: 0.9rem; }
+
+    /* Estilo de destaque do Nº do Auto para o topo do cartão no celular */
+    td:nth-of-type(1) {
+        background-color: #f8f9fa;
+        border-radius: 8px 8px 0 0;
+        border-bottom: 2px solid #dfe6e9;
+        text-align: center;
+        align-items: center;
+    }
 }
 
 /* ========================================================= */

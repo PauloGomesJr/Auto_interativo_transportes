@@ -81,12 +81,15 @@ function finalizarAuto() {
         infrator_nome: document.getElementById('infrator_nome').value || ''
     };
 
-    // Atualiza se for edição, ou adiciona novo
+    // Atualiza se for edição, ou adiciona novo gerando o Nº do Auto
     if (indiceEdicao !== null) {
+        autoCompleto.idTalao = historicoAutos[indiceEdicao].idTalao; // Mantém o número original na edição
         historicoAutos[indiceEdicao] = autoCompleto;
-        indiceEdicao = null; // reseta
+        indiceEdicao = null; 
         exibirAlerta("Atualizado!", "O auto foi atualizado com sucesso no histórico.", "sucesso");
     } else {
+        // Gera o ID: Pega o tamanho do array + 1, transforma em string de 4 dígitos com zeros à esquerda (Ex: T0001)
+        autoCompleto.idTalao = "T" + String(historicoAutos.length + 1).padStart(4, '0');
         historicoAutos.push(autoCompleto);
         exibirAlerta("Sucesso!", "Auto registrado. Você pode imprimi-lo na aba Histórico.", "sucesso");
     }
@@ -110,10 +113,11 @@ function atualizarTabela() {
 
     corpo.innerHTML = historicoAutos.map((a, index) => `
         <tr>
-            <td><strong>${a.placa}</strong></td>
+            <td><strong style="color: #d63031; font-size: 1.1rem;">${a.idTalao}</strong></td> <td><strong>${a.placa}</strong></td>
             <td>${formatarData(a.data)} às ${a.hora}</td>
             <td>${a.infracao}</td>
-            <td>${a.fiscal_nome}</td> <td class="no-print">
+            <td>${a.fiscal_nome}</td> 
+            <td class="no-print">
                 <button onclick="editarAuto(${index})" class="btn-acao btn-editar">✏️ Editar</button>
                 <button onclick="imprimirAuto(${index})" class="btn-acao btn-imprimir">🖨️ 2ª Via</button>
             </td>
