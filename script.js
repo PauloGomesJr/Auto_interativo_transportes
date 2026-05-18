@@ -162,16 +162,16 @@ function carregarNoFormulario(index) {
 
 // FUNÇÃO DO BOTÃO EDITAR
 function editarAuto(index) {
-    carregarNoFormulario(index);
-    indiceEdicao = index; // Avisa o sistema que estamos editando
-    mudarAba('form');
+    indiceEdicao = index; // 1º PASSO: Avisa o sistema que estamos a editar (trava o reset automático)
+    mudarAba('form');     // 2º PASSO: Muda de aba em segurança
+    carregarNoFormulario(index); // 3º PASSO: Carrega os dados
     exibirAlerta("Modo de Edição", "Faça as correções e clique em Finalizar.", "sucesso");
 }
 
 // FUNÇÃO DO BOTÃO IMPRIMIR 2ª VIA
 function imprimirAuto(index) {
-    carregarNoFormulario(index);
-    mudarAba('form'); // Volta para a tela do formulário para preparar a impressão
+    mudarAba('form'); // 1º PASSO: Volta para a tela do formulário (o sistema fará o reset de segurança aqui)
+    carregarNoFormulario(index); // 2º PASSO: Carrega os dados do auto na tela limpa
     
     // Aguarda um pequeno tempo para a tela renderizar o form e chama a impressão.
     // NOTA: O código não volta mais para o histórico automaticamente para evitar 
