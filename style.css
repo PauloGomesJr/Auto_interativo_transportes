@@ -36,7 +36,7 @@ body {
 
 .secao { 
     border: 1px solid #000; 
-    padding: 25px 15px 15px 15px; /* Aumentamos o topo para 25px para dar respiro ao texto */
+    padding: 25px 15px 15px 15px; 
     margin-bottom: 20px; 
     position: relative; 
     border-radius: 0; 
@@ -48,11 +48,11 @@ body {
     background: #fff; 
     padding: 2px 8px; 
     position: absolute; 
-    top: 0; /* Fixa no topo exato da borda */
-    transform: translateY(-50%); /* Centraliza o texto verticalmente na linha, independente do tamanho */
+    top: 0; 
+    transform: translateY(-50%); 
     left: 15px; 
     border: 1px solid #000; 
-    max-width: 85%; /* Impede que o texto encoste na borda direita do celular */
+    max-width: 85%; 
     line-height: 1.2; 
 }
 
@@ -177,13 +177,39 @@ th { background-color: #f1f2f6; }
     .header { margin-bottom: 5px !important; padding-bottom: 5px !important; }
     .header h1 { font-size: 14px !important; }
     .header h2 { font-size: 11px !important; }
-    .num-auto-ait { font-size: 12px !important; margin-top: 2px !important; color: #d63031 !important; } /* Adicione esta linha */
+    .num-auto-ait { font-size: 12px !important; margin-top: 2px !important; color: #d63031 !important; } 
     label { font-size: 9px !important; margin-top: 1px !important; }
-    input, select { font-size: 11px !important; padding: 1px 0 !important; margin: 0 !important; height: auto !important; }
-    textarea { margin: 2px 0 !important; line-height: 14px !important; font-size: 11px !important; height: 35px !important; }
+    
+    /* 1. LIMPEZA WEB: Esconde setas, ícones de calendário/relógio e aparência padrão */
+    input, select { 
+        font-size: 11px !important; 
+        padding: 1px 0 !important; 
+        margin: 0 !important; 
+        height: auto !important;
+        -webkit-appearance: none !important; 
+        -moz-appearance: none !important; 
+        appearance: none !important; 
+        background: transparent !important; 
+    }
+    
+    input[type="date"]::-webkit-calendar-picker-indicator,
+    input[type="time"]::-webkit-calendar-picker-indicator,
+    input[type="date"]::-webkit-inner-spin-button,
+    input[type="time"]::-webkit-inner-spin-button {
+        display: none !important;
+    }
+
+    /* 2. ÁREA DE TEXTO (TEXTAREA): Remove barra de rolagem nativa para o JS esticar o quadro */
+    textarea { 
+        margin: 2px 0 !important; 
+        line-height: 14px !important; 
+        font-size: 11px !important; 
+        height: auto !important; 
+        overflow: hidden !important; 
+        resize: none !important; 
+    }
     
     .lista-infracoes { gap: 2px !important; margin-bottom: 5px !important; }
-    .lista-infracoes input[type="radio"] { width: 10px !important; height: 10px !important; margin-top: 1px !important; }
     .flex-row { gap: 15px !important; margin-top: 5px !important; padding-top: 5px !important; }
     .aviso-legal { font-size: 8px !important; margin-top: 3px !important; padding: 2px !important; }
     .signatures { margin-top: 8px !important; }
@@ -193,7 +219,10 @@ th { background-color: #f1f2f6; }
     .watermark.no-screen { display: block !important; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-45deg); font-size: 4rem !important; font-weight: bold; color: rgba(100, 100, 100, 0.1) !important; z-index: 0; white-space: nowrap; pointer-events: none; }
     * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
     
-    /* Limpeza Inteligente */
+    /* 3. BOTÕES RADIO / CHECKBOX: Esconde a bolinha/quadrado */
+    .lista-infracoes input[type="radio"],
+    .flex-row input[type="checkbox"] { display: none !important; }
+
     .lista-infracoes label:not(:has(input[type="radio"]:checked)) { display: none !important; }
     .lista-infracoes label:has(input[type="radio"]:checked) { font-size: 11px !important; font-weight: bold !important; padding: 3px 0 !important; background-color: #f8f9fa !important; border: 1px solid #000 !important; padding-left: 4px !important; margin: 0 !important; }
     .flex-row label:not(:has(input[type="checkbox"]:checked)) { display: none !important; }

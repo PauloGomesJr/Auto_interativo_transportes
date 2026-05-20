@@ -3,7 +3,7 @@
  */
 
 let historicoAutos = [];
-let indiceEdicao = null; // Variável para controlar se estamos criando ou editando
+let indiceEdicao = null; 
 
 function mudarAba(abaId) {
     document.querySelectorAll('.aba').forEach(aba => aba.classList.remove('active'));
@@ -12,11 +12,15 @@ function mudarAba(abaId) {
         selecionada.classList.add('active');
         window.scrollTo(0, 0); 
     }
-    // Se o utilizador clicar em Novo Auto voluntariamente, garante que o formulário e o número iniciam limpos
+    
     if (abaId === 'form' && indiceEdicao === null) {
         document.getElementById('talao-form').reset();
         const numDoc = document.getElementById('num-auto-doc');
         if (numDoc) numDoc.innerText = "";
+        
+        // Retorna a área de texto ao tamanho normal para um Novo Auto
+        const textarea = document.getElementById('desc_infracao');
+        if (textarea) textarea.style.height = '';
     }
 }
 
@@ -59,7 +63,6 @@ function finalizarAuto() {
         return exibirAlerta("Auto Incompleto", "Preencha todos os campos destacados. (Nº da Ordem é opcional)", "erro");
     }
 
-    // CAPTURA DE TODOS OS CAMPOS PARA PERMITIR EDIÇÃO FUTURA
     const autoCompleto = {
         categoria_transporte: document.getElementById('categoria_transporte').value,
         modelo: document.getElementById('modelo').value,
@@ -87,14 +90,12 @@ function finalizarAuto() {
         infrator_nome: document.getElementById('infrator_nome').value || ''
     };
 
-    // Atualiza se for edição, ou adiciona novo gerando o Nº do Auto
     if (indiceEdicao !== null) {
-        autoCompleto.idTalao = historicoAutos[indiceEdicao].idTalao; // Mantém o número original na edição
+        autoCompleto.idTalao = historicoAutos[indiceEdicao].idTalao; 
         historicoAutos[indiceEdicao] = autoCompleto;
         indiceEdicao = null; 
         exibirAlerta("Atualizado!", "O auto foi atualizado com sucesso no histórico.", "sucesso");
     } else {
-        // Gera o ID: Pega o tamanho do array + 1, transforma em string de 4 dígitos com zeros à esquerda (Ex: T0001)
         autoCompleto.idTalao = "T" + String(historicoAutos.length + 1).padStart(4, '0');
         historicoAutos.push(autoCompleto);
         exibirAlerta("Sucesso!", "Auto registrado. Você pode imprimi-lo na aba Histórico.", "sucesso");
@@ -102,11 +103,10 @@ function finalizarAuto() {
 
     atualizarTabela();
     
-    // Após 1.5s, limpa o formulário e muda para a aba de histórico
     setTimeout(() => {
         document.getElementById('talao-form').reset();
         const numDoc = document.getElementById('num-auto-doc');
-        if (numDoc) numDoc.innerText = ""; // LIMPA O NÚMERO DO AUTO AQUI
+        if (numDoc) numDoc.innerText = ""; 
         camposObrigatorios.forEach(id => {
             const campo = document.getElementById(id);
             if (campo) campo.style.borderBottom = "1px solid #000";
@@ -121,7 +121,8 @@ function atualizarTabela() {
 
     corpo.innerHTML = historicoAutos.map((a, index) => `
         <tr>
-            <td><strong style="color: #d63031; font-size: 1.1rem;">${a.idTalao}</strong></td> <td><strong>${a.placa}</strong></td>
+            <td><strong style="color: #d63031; font-size: 1.1rem;">${a.idTalao}</strong></td>
+            <td><strong>${a.placa}</strong></td>
             <td>${formatarData(a.data)} às ${a.hora}</td>
             <td>${a.infracao}</td>
             <td>${a.fiscal_nome}</td> 
@@ -133,11 +134,9 @@ function atualizarTabela() {
     `).join('');
 }
 
-/// CARREGA OS DADOS DA MEMÓRIA DE VOLTA PARA O FORMULÁRIO
 function carregarNoFormulario(index) {
     const auto = historicoAutos[index];
     
-    // EXIBE O NÚMERO DO AUTO NO CABEÇALHO DO DOCUMENTO
     const numDoc = document.getElementById('num-auto-doc');
     if (numDoc) {
         numDoc.innerText = auto.idTalao ? "AIT Nº " + auto.idTalao : "";
@@ -160,23 +159,24 @@ function carregarNoFormulario(index) {
     document.getElementById('infrator_notificado').checked = auto.infrator_notificado;
 }
 
-// FUNÇÃO DO BOTÃO EDITAR
 function editarAuto(index) {
-    indiceEdicao = index; // 1º PASSO: Avisa o sistema que estamos a editar (trava o reset automático)
-    mudarAba('form');     // 2º PASSO: Muda de aba em segurança
-    carregarNoFormulario(index); // 3º PASSO: Carrega os dados
+    indiceEdicao = index; 
+    mudarAba('form');     
+    carregarNoFormulario(index); 
     exibirAlerta("Modo de Edição", "Faça as correções e clique em Finalizar.", "sucesso");
 }
 
-// FUNÇÃO DO BOTÃO IMPRIMIR 2ª VIA
 function imprimirAuto(index) {
-    mudarAba('form'); // 1º PASSO: Volta para a tela do formulário (o sistema fará o reset de segurança aqui)
-    carregarNoFormulario(index); // 2º PASSO: Carrega os dados do auto na tela limpa
+    mudarAba('form'); 
+    carregarNoFormulario(index); 
     
-    // Aguarda um pequeno tempo para a tela renderizar o form e chama a impressão.
-    // NOTA: O código não volta mais para o histórico automaticamente para evitar 
-    // que o celular imprima a aba errada.
     setTimeout(() => {
+        const textarea = document.getElementById('desc_infracao');
+        if (textarea) {
+            textarea.style.height = 'auto'; 
+            textarea.style.height = (textarea.scrollHeight + 5) + 'px'; 
+        }
+
         window.print();
     }, 800); 
 }
